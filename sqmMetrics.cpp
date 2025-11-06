@@ -27,7 +27,7 @@ void writeJSON(map<string, double> metrics) {
 }
 
 
-// ---------- Operator and Keyword sets ----------
+// Operator and Keyword sets
 set<string> operators = {
     "+", "-", "*", "/", "%", "++", "--", "=", "+=", "-=", "*=", "/=", "%=",
     "<", "<=", ">", ">=", "==", "!=", "&&", "||", "!", "&", "|", "^", "<<", ">>", "~",
@@ -43,7 +43,7 @@ set<string> keywords = {
     "long", "short", "signed", "unsigned", "bool", "true", "false"
 };
 
-// ---------- Helper functions ----------
+// Helper functions
 bool isNumber(const string &tok) {
     static regex number_rx(R"(^(\d+(\.\d*)?|\.\d+)([eE][+-]?\d+)?$)");
     static regex hex_rx(R"(^0[xX][0-9a-fA-F]+$)");
@@ -64,7 +64,7 @@ bool isIdentifier(const string &tok) {
     return (isalpha(tok[0]) || tok[0] == '_');
 }
 
-// ---------- Tokenizer ----------
+// Tokenizer
 vector<string> tokenize(const string &line) {
     vector<string> tokens;
     string token = "";
@@ -84,7 +84,7 @@ vector<string> tokenize(const string &line) {
     return tokens;
 }
 
-// ---------- Main ----------
+// Main
 int main() {
     ifstream file("sample.cpp");
     if (!file.is_open()) {
@@ -135,7 +135,7 @@ csv << "Difficulty," << difficulty << "\n";
 csv << "Effort," << effort << "\n";
 csv.close();
 
-    cout << "Metrics written to metrics.csv ✅" << endl;
+    cout << "Metrics written to metrics.csv " << endl;
 
    map<string, double> metrics = {
     {"Vocabulary", vocabulary},
@@ -149,3 +149,4 @@ writeJSON(metrics);
 
     return 0;
 }
+
