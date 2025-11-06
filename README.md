@@ -52,6 +52,9 @@ A C++-based tool that analyzes a C++ source file to compute **Halstead Metrics**
 - **CSV/JSON File Handling** — To store metric data  
 - **HTML + JavaScript** — For dashboard visualization  
 
+## Usage 
+- Compile the tool - g++ sqmMetrics.cpp -o sqmMetrics
+- Run the analyzer - sqmMetrics.exe
 ---
 
 ## 🧩 Example Output
@@ -68,3 +71,5 @@ Length,55
 Volume,255.6
 Difficulty,22.5
 Effort,5740.2
+
+
