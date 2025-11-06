@@ -8,12 +8,12 @@
 #include <cctype>
 using namespace std;
 
-// ---------- Helper sets ----------
+//  Helper sets 
 set<string> dataTypes = {
     "int", "float", "double", "char", "bool", "long", "short", "string", "auto"
 };
 
-// ---------- Tokenize a line ----------
+// Tokenize a line 
 vector<string> tokenize(const string &line) {
     vector<string> tokens;
     string token = "";
@@ -33,7 +33,7 @@ vector<string> tokenize(const string &line) {
     return tokens;
 }
 
-// ---------- Main ----------
+// Main 
 int main() {
     ifstream file("sample.cpp");
     if (!file.is_open()) {
@@ -53,7 +53,7 @@ int main() {
     map<int, set<string>> liveVarsAtLine;  // line number → live variables
     vector<string> variablesUsedLater;
 
-    // ---------- PASS 1: Identify declared and used variables ----------
+    // Forward pass
     for (size_t i = 0; i < codeLines.size(); ++i) {
         vector<string> tokens = tokenize(codeLines[i]);
 
@@ -75,7 +75,7 @@ int main() {
         }
     }
 
-    // ---------- PASS 2: Backward analysis (simulate liveness) ----------
+    // Backward pass
     set<string> currentlyLive;
     for (int i = codeLines.size() - 1; i >= 0; --i) {
         // Add variables used in this line
@@ -96,14 +96,14 @@ int main() {
         }
     }
 
-    // ---------- Compute average live variables ----------
+    // average computation
     double totalLive = 0;
     for (auto &p : liveVarsAtLine)
         totalLive += p.second.size();
 
     double avgLive = (codeLines.empty()) ? 0 : totalLive / codeLines.size();
 
-    // ---------- Print results ----------
+    // Print results 
     cout << "Total Declared Variables: " << declaredVars.size() << endl;
     cout << "Average Live Variables per line: " << avgLive << endl;
     cout << "\nLive variable snapshot:\n";
@@ -114,7 +114,7 @@ int main() {
         cout << endl;
     }
 
-    // ---------- Write to CSV ----------
+    // CSV
     ofstream csv("live_variables.csv");
     csv << "Line,Live Variables\n";
     for (auto &p : liveVarsAtLine) {
@@ -129,3 +129,4 @@ int main() {
 
     return 0;
 }
+
